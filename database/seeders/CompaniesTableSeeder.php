@@ -16,22 +16,62 @@ class CompaniesTableSeeder extends Seeder
     public function run()
     {
         DB::table('companies')->insert([
-            [
-                'company_name' => 'Starbucks Coffee Japan',
-                'street_address' => '東京都品川区上大崎',
-                'representative_name' => '水口貴文',
-                'created_at' => date('Y-m-d'),
-                'updated_at' => date('Y-m-d')
-                
-            ],
-          [
-            'company_name' => '株式会社ドトールコーヒー',
-            'street_address' => '東京都渋谷区神南',
-            'representative_name' => '星野正則',
+           [
+            'company_name' => '企業A',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
             'created_at' => date('Y-m-d'),
             'updated_at' => date('Y-m-d')
-            
-      ]
+                
+           ],
+           [
+            'company_name' => '企業B',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+                
+           ],
+           [
+            'company_name' => '企業C',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+                
+           ],
+           [
+            'company_name' => '企業D',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+                
+           ],
+           [
+            'company_name' => '企業E',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+                
+           ],
+           [
+            'company_name' => '企業F',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+                
+           ],
+           [
+            'company_name' => '企業G',
+            'street_address' => '東京都',
+            'representative_name' => 'テスト',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+                
+           ],
           ]);
     }
 }

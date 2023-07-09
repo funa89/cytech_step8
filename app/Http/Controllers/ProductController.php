@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateRequest;
+
 
 class ProductController extends Controller
 {
@@ -12,79 +16,115 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //DBよりProductテーブルの値を全て取得
-        $products = Product::all(); 
-        
-        //dd($products);
-        //取得した値をビューindexに渡す
-        return view('index' , compact('products')); //['products' => $products]
+
+
+
+    //商品一覧画面表示
+    public function index() {
+        $product_model = new Product();
+        $company_model  = new Company();
+        $companies = $company_model->index();
+        $products = $product_model->index();
+        return view('index', ['products' => $products],['companies' => $companies]);
+        }
+
+
+  //検索
+    public function Search(Request $request) {
+        $search_product = $request->input('keyword');
+        $search_company = $request->input('company');
+        DB::beginTransaction();
+
+        try {
+            $product_model = new Product();
+            $company_model = new Company();
+            $companies = $company_model->index();
+            $products = $product_model->getProductSearch($search_product, $search_company);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollback();
+            return back();
+        }
+        return view('index', ['products' => $products,'companies' => $companies]);  
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    // 新規登録画面の表示
+    public function create() {
+           $company_model = new Company();
+           $companies = $company_model->index();
+           return view('create', ['companies' => $companies]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+ 
+    //商品新規登録
+    public function store(CreateRequest $request){     
+           // $data = new Product();
+            //$data->company_id=$request->company_id;
+           // $data->product_name=$request->product_name;
+           // $data->price=$request->price;
+           // $data->stock=$request->stock;
+           // $data->comment=$request->comment;
+           // $data->save();
+                //dd($request);
+
+             Product::create([
+                'product_name' => $request->product_name,
+                'company_id' => $request->company_id,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'comment' => $request->comment,
+                'img_path' => $request->img_path,
+                //dd($request)
+           ]);
+            //処理が完了したら自画面にリダイレクト
+            return redirect()->route('create');
+            }
+
+    // 詳細画面
+    public function showDetail($id){   
+           $product_model = new Product();
+           $product = $product_model->getDetail($id);
+           return view ('detail', compact('product'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
+    // 編集画面
+    public function showEdit($id){   
+          $product_model = new Product();
+          $product = $product_model->getDetail($id);
+          return view ('edit', compact('product'));
+    }  
+
+    // 更新する
+    public function update(CreateRequest $request) {
+    //dd($request);
+    // トランザクション開始
+    DB::beginTransaction();
+    try {
+        // 登録処理呼び出し
+        $product_model = new Product();
+        $product_model->createProduct($request);
+        DB::commit();
+    } catch (\Exception $e) {
+        DB::rollback();
+        return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
+    // 処理が完了したら自画面にリダイレクト
+    return redirect()->route('edit');
+}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
+    // 削除ボタン
+    public function delete($id){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+        // トランザクション開始
+        DB::beginTransaction();
+        try{
+            Product::destroy($id);
+            DB::commit();
+        } catch(\Throwable $e) {
+            DB::rollback();
+            return back();
+        }
+        return redirect()->route('index');
     }
 }
