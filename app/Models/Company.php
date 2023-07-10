@@ -25,9 +25,9 @@ class Company extends Model
         return $companies;
     }
 
-    public function products(){
-       return $this->hasMany(Product::class);
-      }//6/20
+    // public function products(){
+    //    return $this->hasMany(Product::class);
+    //   }//6/20
 
     
     //public function getList(){

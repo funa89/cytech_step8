@@ -11,8 +11,7 @@
     <p class = "text-danger">{{ session ('err_msg') }}</p>
     @endif
 
-<!-- 検索フォーム -->
-<div class = "searchall">
+    <!-- 検索フォーム -->
     <div class="search">
         <div>
             <div class="post-search-form col-md-6">
@@ -22,14 +21,12 @@
                        <input type="key" name="keyword" class="form-control" placeholder="キーワード検索" id = "keyword">
                    </div>
                     
-              </form> 
+                </form> 
             </div>
         </div>
     </div>
-  </div>
 
-
-<!-- カテゴリー -->
+    <!-- カテゴリー -->
   <div class="pull">
           <select class="form-control" id="company_id" name="company_id">
                   <option value="">メーカー名</option>
@@ -55,19 +52,20 @@
           <th>価格</th>
           <th>在庫数</th>
           <th>メーカー名</th>
-          <th>
+          
           <!-- 新規登録ボタン -->
-          <div class="container">
-          <button onclick="location.href='./create'" class="btn btn-success btn-sm">新規登録</button>
-          </div></th>
-          <th></th>
+          <th>
+            <div class="container">
+               <button onclick="location.href='./create'" class="btn btn-success btn-sm">新規登録</button>
+            </div>
+          </th>
         </tr>
     </thead>
       <tbody id="productList">
       @foreach($products as $product)
         <tr>
             <td>{{ $product->id}}</td>
-            <td>{{ $product->img_path}}</td>
+            <td><img width="50px" src="{{ asset('public/storage/' . $product->img_path) }}" /></td>
             <td>{{ $product->product_name}}</td>
             <td>{{ $product->price}}</td>
             <td>{{ $product->stock}}</td>
@@ -88,15 +86,6 @@
       </tbody>
     </thead>
     <br>
-    <!-- サーバーに送信されるデータを格納するために使用 -->
-    <input id="storedWord" name="storedWord" type="hidden">
-    <input id="storedCompany" name="storedCompany" type="hidden">
-    <input id="storedUpperPriceLimit" name="storedUpperPriceLimit" type="hidden">
-    <input id="storedLowerPriceLimit" name="storedLowerPriceLimit" type="hidden">
-    <input id="storedUpperStockLimit" name="storedUpperStockLimit" type="hidden">
-    <input id="storedLowerStockLimit" name="storedLowerStockLimit" type="hidden">
-    <input id="storedPressedButton" name="storedPressedButton" type="hidden">
-    <input id="storedSortToggle" name="storedSortToggle" type="hidden">
   </div>
 </div>
 @endsection

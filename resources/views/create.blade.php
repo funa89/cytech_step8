@@ -19,10 +19,10 @@
                             <p>{{ $errors->first('product_name') }}</p>
                     @endif
                     </div>
-                </div>
+            </div>
 
                 <!--メーカ名-->
-                <div class="form-group">
+            <div class="form-group">
                     <label for="company_id">{{ __('メーカー名*') }}<span class="badge badge-danger ml-2"></span></label>
                     <select class="form-control" id="company_id" name="company_id">
                         <option value="">     </option>
@@ -30,40 +30,40 @@
                         <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                     @endforeach
                     </select>
-                </div>
+            </div>
 
                 <!-- 価格登録 -->
-                <div class="form-group">
+            <div class="form-group">
                     <label for="price">価格*</label>
                     <input type="price" class="form-control" id="price" name="price" value="{{old('price')}}">
                     @if ($errors->has('price'))
-                    <div class="text-danger">
+                      <div class="text-danger">
                             <p>{{ $errors->first('price') }}</p>
                     @endif
-                    </div>
-                </div>
+                      </div>
+            </div>
 
                 <!-- 在庫数登録 -->
-                <div class="form-group">
+            <div class="form-group">
                     <label for="stock">在庫数*</label>
                     <input type="stock" class="form-control" id="stock" name="stock" value="{{old('stock')}}">
                     @if ($errors->has('stock'))
-                    <div class="text-danger">
+                      <div class="text-danger">
                             <p>{{ $errors->first('stock') }}</p>
-                    </div>
+                      </div>
                     @endif
-                </div>
+            </div>
 
                 <!-- コメント -->
-                <div class="form-group">
+            <div class="form-group">
                     <label for="comment">コメント</label>
                     <textarea class="form-control" id="comment" name="comment"></textarea>{{old('comment')}}</textarea>
                     @if ($errors->has('comment'))
-                    <div class="text-danger">
+                      <div class="text-danger">
                             {{ $errors->first('comment') }}
-                    </div>
+                      </div>
                     @endif
-                </div>
+            </div>
 
                 <!-- 画像登録 -->
                 <div class="form-group">
@@ -72,13 +72,13 @@
                      <input type="file" name="image">
                 </div>
 
-            <!-- 登録ボタン -->
+                <!-- 登録ボタン -->
             <div class="create-btn">
                 <div class="mt-5">
                     <button type="submit" class="btn btn-danger btn-sm">登録</button>
                 </div>
             </div>
-            <!-- 戻るボタン -->
+                <!-- 戻るボタン -->
             <div class="createback">
                  <input class="btn btn-primary btn-sm" type="button" onclick="history.back(-1)" value="戻る">
             </div>

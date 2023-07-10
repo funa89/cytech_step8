@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/home',function(){ return view('home');});
 
-//Route::get('/index',[CompanyController::class, 'select']);
+
 //Route::middleware('auth')->group(function(){
 // 商品情報画面のルーティング
 Route::get('/index',[ProductController::class, 'index'])->name('index');
@@ -42,7 +42,7 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/detail/{id}', [ProductController::class, 'showDetail'])->name('detail');
 
 // 編集画面
-Route::get('details/edit/{id}', [ProductController::class, 'showEdit'])->name('edit');
+Route::get('/details/edit/{id}', [ProductController::class, 'showEdit'])->name('edit');
 
 //編集画面更新
 Route::post('/edit/update', [ProductController::class, 'update'])->name('update');
