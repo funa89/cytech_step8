@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <h2>商品編集画面</h2>
-        <form method="POST" action="{{ route('update') }}" onSubmit="checkSubmit()">
+        <form method="POST" action="{{ route('update', ['id' => $product->id ]) }}" onSubmit="checkSubmit()">
         @csrf
 
     <div class="edit-title">
@@ -27,7 +27,7 @@
   </div>
 <!-- メーカー名-->
   <div class="form-company">
-     <label for="company_name">メーカー名</label>
+     <label for="company_name">メーカー名*</label>
         <select name="company_id" id="company" class="form-control">
              @foreach ($companies as $company)
              <option value="{{ $company->id }}" @if($company->id == $product->company_id) selected @endif>{{ $company->company_name }}</option>

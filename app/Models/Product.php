@@ -46,7 +46,7 @@ class Product extends Model{
 
     //商品登録機能
     public function createProduct($product,$file_name) {
-      $img_path = 'storage/'. $file_name;
+      $img_path = ''. $file_name;
 
       DB::table('products')->insert([
           'company_id' => $product->company_id,
@@ -59,7 +59,6 @@ class Product extends Model{
     }
 
 
-
     //編集画面
      public function getEdit($id) {
     // productsテーブルからデータを取得（クエリビルダ）
@@ -70,6 +69,22 @@ class Product extends Model{
         ->first();
       return $product;
     }
+    
+    // //商品更新
+    // public function updateData($product,$file_name,$id) {
+    //   $img_path = ''. $file_name;
+    //   //$product = DB::table('products')->get($id);
+    //   $product = Product::find($id);
+    //   DB::table('products')->update([
+    //       'company_id' => $product->company_id,
+    //       'product_name' => $product->product_name,
+    //       'price' => $product->price,
+    //       'stock' => $product->stock,
+    //       'comment' => $product->comment,
+    //       'img_path'  => $img_path,
+    //   ]);
+    // }
+
 
     // 検索機能（商品名検索）
      public function search($keyword) {

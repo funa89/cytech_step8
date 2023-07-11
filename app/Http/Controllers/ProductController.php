@@ -65,7 +65,7 @@ class ProductController extends Controller
     // アップロードされた画像を取得
         $file_name = $request->file('image')->getClientOriginalName();
     // 取得したファイル名で保存
-        $request->file('image')->storeAs('public/storage' , $file_name);
+        $request->file('image')->storeAs('', $file_name);
 
         //トランザクション
         DB::beginTransaction();
@@ -98,31 +98,31 @@ class ProductController extends Controller
           return view ('edit', ['product' => $product, 'companies' => $companies]);
     }  
 
-    // 更新する
+    // 更新処理
     public function update(CreateRequest $request) {
-      // アップロードされた画像を取得
+       // アップロードされた画像を取得
       $file_name = $request->file('image')->getClientOriginalName();
-      // 取得したファイル名で保存
-      $request->file('image')->storeAs('public/storage' , $file_name);
-  
-    // トランザクション
+       // 取得したファイル名で保存
+      $request->file('image')->storeAs('',$file_name);
+       // トランザクション
     DB::beginTransaction();
     try {
-        // 登録処理呼び出し
+        // 更新処理呼び出し
         $product_model = new Product();
-        $product_model->createProduct($request,$file_name);
+       // $product_model->updateData($request,$file_name,$id);
         DB::commit();
     } catch (\Exception $e) {
         DB::rollback();
         return back();
     }
-    // 処理が完了したら自画面にリダイレクト
-        return redirect()->route('edit');
+        // 処理が完了したら自画面にリダイレクト
+        return redirect(route('edit'));
+        //return redirect()->route('edit');
     }
+
 
     // 削除ボタン
     public function delete($id){
-
         // トランザクション
         DB::beginTransaction();
         try{
@@ -132,7 +132,7 @@ class ProductController extends Controller
             DB::rollback();
             return back();
         }
-    //処理が完了したら自画面にリダイレクト
+        //処理が完了したら自画面にリダイレクト
         return redirect()->route('index');
     }
 }
