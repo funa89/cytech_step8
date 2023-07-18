@@ -45,7 +45,7 @@ Route::get('/detail/{id}', [ProductController::class, 'showDetail'])->name('deta
 Route::get('/details/edit/{id}', [ProductController::class, 'showEdit'])->name('edit');
 
 //編集画面更新
-Route::post('/edit/update', [ProductController::class, 'update'])->name('update');
+Route::put('/edit/update{id}', [ProductController::class, 'update'])->name('update')->middleware('web');
 
 // 削除
 Route::delete('/index/delete/{id}', [ProductController::class, 'delete'])->name('delete');

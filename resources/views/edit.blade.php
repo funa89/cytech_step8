@@ -7,8 +7,9 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <h2>商品編集画面</h2>
-        <form method="POST" action="{{ route('update', ['id' => $product->id ]) }}" onSubmit="checkSubmit()">
+        <form method="POST" action="{{ route('update', ['id' => $product->id ]) }}" onSubmit="checkSubmit()" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
     <div class="edit-title">
         <h5>ID.{{ $product->id}}</h5>
@@ -18,7 +19,7 @@
 <!-- 商品名 -->
   <div class="form-name">
      <label for="company_id">{{ __('商品名*') }}</label>
-     <input type="text" class="form-control name="product_name" id="company_id" value="{{ $product->product_name}}">
+     <input type="text" class="form-control" name="product_name" id="company_id" value="{{ $product->product_name}}">
      @if ($errors->has('company_id'))
       <span class="invalid-feedback" role="alert">
       {{ $errors->first('company_id') }}
