@@ -5,7 +5,6 @@ namespace App\Models;
 //use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class Product extends Model{
     //use HasFactory;
@@ -24,7 +23,7 @@ class Product extends Model{
     protected $fillable = ['company_id','product_name','price','stock','img_path','created_at','updated_at'];
 
     public $timestamps = true;
-    
+
     // 一覧画面表示
     public function index() {
     // productsテーブルからデータを取得（クエリビルダ）
@@ -48,7 +47,7 @@ class Product extends Model{
 
     //商品登録機能
     public function createProduct($product,$file_name) {
-      $img_path = $file_name;
+      $img_path = 'images/'.$file_name;
 
       DB::table('products')->insert([
           'company_id' => $product->company_id,
@@ -77,7 +76,7 @@ class Product extends Model{
          DB::table('products')->where('id', $id)->update($product);
     }
 
-
+    //商品検索
     public function search($keyword, $company) {
       $query = DB::table('products')
           ->join('companies', 'company_id', '=', 'companies.id')
@@ -95,16 +94,4 @@ class Product extends Model{
   
       return $products;
   }
-  
-//     public function search(Request $request) {
-//       $keyword = $request->input('keyword');
-    
-//       $products = DB::table('products')
-//           ->join('companies', 'company_id', '=', 'companies.id')
-//           ->select('products.*', 'companies.company_name')
-//           ->where('products.product_name', 'like', "%$keyword%")
-//           ->get();
-    
-//       return view('index', ['products' => $products]);
-//     }
  }

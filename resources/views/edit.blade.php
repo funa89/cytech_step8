@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="row">
+<div class="row mx-auto">
     <div class="col-md-8 col-md-offset-2">
       <h2>商品編集画面</h2>
         <form method="POST" action="{{ route('update', ['id' => $product->id ]) }}" onSubmit="checkSubmit()" enctype="multipart/form-data">

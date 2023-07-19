@@ -3,7 +3,7 @@
 @section('title', '登録画面')
 
 @section('content')
-<div class="row">
+<div class="row mx-auto">
     <div class="col-md-8">
         <h2>商品登録</h2>
         <form method="POST" action="{{ route('store') }}" onSubmit="checkSubmit()" enctype="multipart/form-data">

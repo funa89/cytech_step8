@@ -4,7 +4,7 @@
 
 @section('content')
 <h3>詳細画面</h3>
-<table class="table table-striped">
+<table class="table table-striped mx-auto">
   <thead>
     <tr>
     <th>ID</th>
@@ -20,7 +20,7 @@
   <tbody>
     <tr>
     <td>{{ $product->id}}</td>
-    <td><img width="50px" src="{{ asset('public/storage/' . $product->img_path) }}"></td>
+    <td><img width="50px" src="{{ asset('storage/' . $product->img_path) }}"></td>
     <td>{{ $product->product_name}}</td>
     <td>{{ $product->company_name}}</td>
     <td>{{ $product->price}}</td>

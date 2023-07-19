@@ -94,7 +94,7 @@ class ProductController extends Controller
     // 取得したファイル名で保存
     if ($file) {
         $file_name = $file->getClientOriginalName();
-        $file->storeAs('', $file_name);
+        $file->storeAs('public/images', $file_name);
     } else {
         $file_name = null;
     }

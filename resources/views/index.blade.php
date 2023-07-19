@@ -2,7 +2,7 @@
 
 @section('title','商品一覧')
 @section('content')
-<div class="row">
+<div class="row mx-auto">
     <div class="col-md-10">
         <h2>商品一覧画面</h2>
 
@@ -64,7 +64,7 @@
                 @foreach($search_results as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td><img width="50px" src="{{ asset('storage/' . $product->img_path) }}" /></td>
+                    <td><img width="100px" src="{{ asset('storage/' . $product->img_path) }}" /></td>
                     <td>{{ $product->product_name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>
@@ -85,7 +85,7 @@
                 @foreach($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td><img width="50px" src="{{ asset('storage/' . $product->img_path) }}" /></td>
+                    <td><img width="100px" src="{{ asset('storage/' . $product->img_path) }}" /></td>
                     <td>{{ $product->product_name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>
