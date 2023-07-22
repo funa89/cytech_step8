@@ -72,8 +72,33 @@ class Product extends Model{
     }
     
     //商品更新
-    public function updateProduct($id, $product) {
-         DB::table('products')->where('id', $id)->update($product);
+    public function updateProduct($id, $product, $file_name) {
+  //     $product_data = [
+  //         'company_id' => $product->company_id,
+  //         'product_name' => $product->product_name,
+  //         'price' => $product->price,
+  //         'stock' => $product->stock,
+  //         'comment' => $product->comment,
+  //     ];
+  
+  //     if ($file_name) {
+  //         $img_path = 'images/' . $file_name;
+  //         $product_data['img_path'] = $img_path;
+  //     }
+  //     DB::table('products')->where('id', $id)->update($product_data);
+  // }
+  
+    // public function updateProduct($id, $product, $file_name) {
+        $img_path = 'images/'.$file_name;
+   
+         DB::table('products')->where('id', $id)->update([
+          'company_id' => $product->company_id,
+          'product_name' => $product->product_name,
+          'price' => $product->price,
+          'stock' => $product->stock,
+          'comment' => $product->comment,
+          'img_path' => $img_path,
+         ]);
     }
 
     //商品検索
@@ -93,5 +118,5 @@ class Product extends Model{
       $products = $query->get();
   
       return $products;
-  }
+    }
  }

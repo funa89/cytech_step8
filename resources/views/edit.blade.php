@@ -57,7 +57,7 @@
 <!-- コメント -->
   <div class="form-comment">
     <label for="comment">コメント</label>
-    <textarea class="form-control" id="comment" name="comment"></textarea>
+    <textarea class="form-control" id="comment" name="comment">{{ $product->comment }}</textarea>
       @if ($errors->has('comment'))
     <div class="text-danger">
             {{ $errors->first('comment') }}
@@ -69,6 +69,11 @@
      <label for="img">商品画像</label>
      @csrf
      <input type="file" name="image">
+     @if ($product->img_path)
+        <img width="100px" src="{{ asset('storage/' . $product->img_path) }}" alt="商品画像">
+    @else
+        <p>画像が登録されていません</p>
+    @endif
   </div>
 
 </div>
