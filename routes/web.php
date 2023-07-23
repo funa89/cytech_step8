@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
@@ -20,11 +21,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
+// Route::post('/login',[LoginController::class, 'login']);
+// Route::post('/logout', [LoginController::class,'logout'])->name('logout');
 
-Route::get('/home',function(){ return view('home');});
 
 
-//Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function(){
+
+Route::get('/home',[ProductController::class,'index'])->name('home');
+
 // 商品情報画面のルーティング
 Route::get('/index',[ProductController::class, 'index'])->name('index');
 
@@ -50,7 +56,7 @@ Route::put('/edit/update{id}', [ProductController::class, 'update'])->name('upda
 // 削除
 Route::delete('/index/delete/{id}', [ProductController::class, 'delete'])->name('delete');
 
-//});
+});
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/index', function () {
 //    return view('index');
