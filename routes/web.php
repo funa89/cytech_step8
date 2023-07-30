@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -16,15 +16,16 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Auth::routes();
-// Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
-// Route::post('/login',[LoginController::class, 'login']);
-// Route::post('/logout', [LoginController::class,'logout'])->name('logout');
-
+//Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login',[LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class,'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/register',[RegisterController::class,'showRegistrationForm'])->name('register');
+Route::post('/register',[RegisterController::class,'register']);
 
 
 Route::middleware('auth')->group(function(){
@@ -42,7 +43,6 @@ Route::post('/store', [ProductController::class, 'store'])->name('store');
 
 // 検索機能
 Route::get('/search', [ProductController::class, 'search'])->name('search');
-//Route::post('/search', [ProductController::class, 'Search'])->name('search');
 
 //詳細画面
 Route::get('/detail/{id}', [ProductController::class, 'showDetail'])->name('detail');
@@ -57,13 +57,4 @@ Route::put('/edit/update{id}', [ProductController::class, 'update'])->name('upda
 Route::delete('/index/delete/{id}', [ProductController::class, 'delete'])->name('delete');
 
 });
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('/index', function () {
-//    return view('index');
-//})->middleware(['auth'])->name('index');//6/18 /indexにアクセスするとindex.blade.phpのビューが表示される。ログインで認証された場合のみ。
-
-/**--resourceで作成したものは、自動的に必要なルーティングが作成される。 */
-//Route::resource('products', ProductController::class);
-//Route::resource('companies', CompanyController::class);
-//Route::resource('sales', SaleController::class);
 

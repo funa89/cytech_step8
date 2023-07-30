@@ -21,20 +21,20 @@ class CreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'company_id' => 'required | numeric',
-            'product_name' => 'required',
+            'product_name' => 'required | string',
             'price' =>'required | numeric',
             'stock'=> 'required | numeric',
             'comment'=> 'nullable'
         ];
     }
-    public function attributes()
-    {
+    
+    public function attributes() {
         return [
             'product_name' => '商品名',
+            'company_id' => 'メーカー名',
             'price' => '価格',
             'stock' => '在庫数',
         
@@ -44,8 +44,9 @@ class CreateRequest extends FormRequest
     public function messages() {
         return [
             'product_name.required' => ':attributeは必須項目です。',
-            'price' => ':attributeは必須項目です。',
-            'stock' => ':attributeは必須項目です。',
+            'company_id.required' => ':attributeは必須項目です。',
+            'price.required' => ':attributeは必須項目です。',
+            'stock.required' => ':attributeは必須項目です。',
         ];
     }
 }

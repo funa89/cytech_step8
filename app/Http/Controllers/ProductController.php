@@ -17,6 +17,7 @@ class ProductController extends Controller
      */
     //商品一覧画面表示
     public function index(Request $request) {
+
         $product_model = new Product();
         $company_model = new Company();
         $companies = $company_model->index();
@@ -37,6 +38,7 @@ class ProductController extends Controller
 
     //検索
     public function search(Request $request) {
+
         $keyword = $request->input('keyword');
         $company = $request->input('company');
         
@@ -50,28 +52,31 @@ class ProductController extends Controller
    
     // 新規登録画面の表示
     public function create() {
-           $company_model = new Company();
-           $companies = $company_model->index();
-           return view('create', ['companies' => $companies]);
+
+        $company_model = new Company();
+        $companies = $company_model->index();
+        return view('create', ['companies' => $companies]);
     }
+
     //商品新規登録
-    public function store(CreateRequest $request){     
+    public function store(CreateRequest $request) {     
+
     // アップロードされた画像を取得
         $file = $request->file('image');
     // 取得したファイル名で保存
-    if ($file) {
-        $file_name = $file->getClientOriginalName();
-        $file->storeAs('public/images', $file_name);
-    } else {
-        $file_name = null;
-    }
+        if ($file) {
+            $file_name = $file->getClientOriginalName();
+            $file->storeAs('public/images', $file_name);
+        } else {
+            $file_name = null;
+        }
 
         //トランザクション
         DB::beginTransaction();
         try {
         // 登録処理呼び出し
            $product_model = new Product();
-           $product_model->createProduct($request,$file_name);
+           $product_model->createProduct($request, $file_name);
         DB::commit();
         } catch (\Exception $e) {
         DB::rollback();
@@ -82,14 +87,16 @@ class ProductController extends Controller
     }
 
     // 詳細画面
-    public function showDetail($id){   
+    public function showDetail($id) {   
+
            $product_model = new Product();
            $product = $product_model->getDetail($id);
            return view ('detail', compact('product'));
     }
 
     // 編集画面
-    public function showEdit($id){   
+    public function showEdit($id) {   
+
           $product_model = new Product();
           $company_model = new Company();
           $product = $product_model->getDetail($id);
@@ -99,40 +106,35 @@ class ProductController extends Controller
 
     // 更新処理
     public function update(Request $request, $id) {
+
         $file = $request->file('image');
-    if ($file) {
+
+      if ($file) {
         $file_name = $file->getClientOriginalName();
         $file->storeAs('public/images', $file_name);
-    } else {
+      } else {
         $file_name = null;
-    }
+      }
 
-    //   $product = [
-    //     'product_name' => $request->input('product_name'),
-    //     'company_id' => $request->input('company_id'),
-    //     'price' => $request->input('price'),
-    //     'stock' => $request->input('stock'),
-    //     'comment' => $request->input('comment'),
-    //     'img_path' => $file_name,
-    // ];
-    //トランザクション開始
-    DB::beginTransaction();
-    try {
-        // 登録処理呼び出
-        $model = new Product();
-        $model->updateProduct($id, $request, $file_name);
+      //トランザクション開始
+      DB::beginTransaction();
+      try {
+        // 登録処理呼び出し
+        $product_model = new Product();
+        $product_model->updateProduct($id, $request, $file_name);
         DB::commit();
-    } catch (\Exception $e) {
+      } catch (\Exception $e) {
         DB::rollback();
         return back();
-    }
-      // 処理が完了したら自画面にリダイレクト
+      }
+
+        //処理が完了したら自画面にリダイレクト
         return redirect()->route('edit',['id' => $id]);
     }
       
-
     // 削除ボタン
-    public function delete($id){
+    public function delete($id) {
+
         // トランザクション
         DB::beginTransaction();
         try{
@@ -142,6 +144,7 @@ class ProductController extends Controller
             DB::rollback();
             return back();
         }
+        
         //処理が完了したら自画面にリダイレクト
         return redirect()->route('index');
     }

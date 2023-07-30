@@ -7,14 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Product extends Model{
-    //use HasFactory;
-    //リレーション（Eloquentで必要）
-    //public function sales(){
-      //return $this->hasMany(Sale::class);
-    //}//6/20
-    //public function company(){
-    //  return $this->belongsTo(Company::class);
-    //}//6/20
 
     //テーブル名指定
     protected $table = 'products';
@@ -72,37 +64,28 @@ class Product extends Model{
     }
     
     //商品更新
-    public function updateProduct($id, $product, $file_name) {
-  //     $product_data = [
-  //         'company_id' => $product->company_id,
-  //         'product_name' => $product->product_name,
-  //         'price' => $product->price,
-  //         'stock' => $product->stock,
-  //         'comment' => $product->comment,
-  //     ];
-  
-  //     if ($file_name) {
-  //         $img_path = 'images/' . $file_name;
-  //         $product_data['img_path'] = $img_path;
-  //     }
-  //     DB::table('products')->where('id', $id)->update($product_data);
-  // }
-  
-    // public function updateProduct($id, $product, $file_name) {
+     public function updateProduct($id, $product, $file_name) {
+
         $img_path = 'images/'.$file_name;
-   
-         DB::table('products')->where('id', $id)->update([
+
+        $product_data = [
           'company_id' => $product->company_id,
           'product_name' => $product->product_name,
           'price' => $product->price,
           'stock' => $product->stock,
           'comment' => $product->comment,
-          'img_path' => $img_path,
-         ]);
+       ];
+  
+       if ($file_name) {
+          $product_data['img_path'] = $img_path;
+       }
+  
+        $product_model = $this->find($id);
+        $product_model->update($product_data);
     }
 
     //商品検索
-    public function search($keyword, $company) {
+     public function search($keyword, $company) {
       $query = DB::table('products')
           ->join('companies', 'company_id', '=', 'companies.id')
           ->select('products.*', 'companies.company_name');

@@ -1,29 +1,29 @@
 @extends('layouts.app')
 
 @section('title','商品一覧')
+
 @section('content')
-<div class="row mx-auto">
-    <div class="col-md-10">
-        <h2>商品一覧画面</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h1>商品一覧画面</h1>
 
-        <!-- エラーがある場合に表示される -->
-        @if (session('err_msg'))
-        <p class="text-danger">{{ session('err_msg') }}</p>
-        @endif
+            <!-- エラーがある場合に表示される -->
+            @if (session('err_msg'))
+            <p class="text-danger">{{ session('err_msg') }}</p>
+            @endif
 
-        <!-- 検索フォーム -->
-        <div class="search">
-            <div>
-                <div class="post-search-form col-md-6">
+            <!-- 検索フォーム -->
+            <div class="row justify-content-between pt-4 mb-4">
+                <div class="col-md-12">
                     <form class="form-inline" action="{{ route('search') }}" method="GET">
                         @csrf
-                        <div class="form-group">
-                            <input type="text" name="keyword" class="form-control" placeholder="キーワード検索"
-                                id="keyword">
+                        <div class="form-group mr-2">
+                            <input type="text" name="keyword" class="form-control" placeholder="キーワード検索" id="keyword">
                         </div>
 
                         <!-- カテゴリー -->
-                        <div class="form-group">
+                        <div class="form-group mr-2">
                             <select class="form-control" id="company_id" name="company">
                                 <option value="">メーカー名</option>
                                 @foreach ($companies as $company)
@@ -38,7 +38,8 @@
                     </form>
                 </div>
             </div>
-        </div>
+
+    
 
         <table class="table table-striped">
             <thead>
@@ -53,7 +54,7 @@
                     <!-- 新規登録ボタン -->
                     <th>
                         <div class="container">
-                            <button onclick="location.href='./create'" class="btn btn-success btn-sm">新規登録</button>
+                            <button onclick="location.href='./create'" class="btn btn-success">新規登録</button>
                         </div>
                     </th>
                 </tr>
@@ -62,7 +63,7 @@
                 @if(isset($search_results))
                 <h2>検索結果</h2>
                 @foreach($search_results as $product)
-                <tr>
+                  <tr>
                     <td>{{ $product->id }}</td>
                     <td><img width="100px" src="{{ asset('storage/' . $product->img_path) }}" /></td>
                     <td>{{ $product->product_name }}</td>
@@ -70,20 +71,20 @@
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->company_name }}</td>
                     <td><a href="{{ route('detail', $product->id) }}"
-                            class="btn btn-primary btn-sm">詳細</a></td>
+                            class="btn btn-primary">詳細</a></td>
                     <td>
                         <form method="POST" action="{{ route('delete', $product->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"
+                            <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('削除しますか？');">削除</button>
                         </form>
                     </td>
-                </tr>
+                  </tr>
                 @endforeach
                 @else
                 @foreach($products as $product)
-                <tr>
+                  <tr>
                     <td>{{ $product->id }}</td>
                     <td><img width="100px" src="{{ asset('storage/' . $product->img_path) }}" /></td>
                     <td>{{ $product->product_name }}</td>
@@ -100,12 +101,12 @@
                                 onclick="return confirm('削除しますか？');">削除</button>
                         </form>
                     </td>
-                </tr>
+                  </tr>
                 @endforeach
                 @endif
             </tbody>
         </table>
-        <br>
     </div>
+</div>
 </div>
 @endsection

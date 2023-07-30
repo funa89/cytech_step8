@@ -1,0 +1,31 @@
+
+h1{
+    text-align: center;
+}
+
+span {
+    color: red;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.form-group {
+    margin-right: 10px;
+}
+
+.container {
+    padding: 0;
+}
+
+.btn-container {
+    display: flex;
+    align-items: right;
+    padding-top: 20px;
+}
+
+.back-btn {
+    padding-left: 20px;
+}

@@ -24,15 +24,4 @@ class Company extends Model
 
         return $companies;
     }
-
-    // public function products(){
-    //    return $this->hasMany(Product::class);
-    //   }//6/20
-
-    
-    //public function getList(){
-    //    $companies = Company::all();
-    //    return view('index')->with('companies', $companies);
-    }//DBからcompaniestableのデータを持ってくる。
-
-
+}
