@@ -19,7 +19,7 @@
                <!-- 商品名 -->
                    <div class="form-name pt-2">
                         <label for="company_id">{{ __('商品名') }}<span>*</span></label>
-                             <input type="text" class="form-control" name="product_name" id="company_id" value="{{ $product->product_name}}">
+                             <input type="text" class="form-control" name="product_name" id="txtProductName" value="{{ $product->product_name}}">
                              @if ($errors->has('product_name'))
                              <div class="text-danger">
                                 <p>{{ $errors->first('product_name') }}</p>
@@ -30,7 +30,7 @@
                <!-- メーカー名-->
                    <div class="form-company pt-2">
                         <label for="company_name">メーカー名<span>*</span></label>
-                            <select name="company_id" id="company" class="form-control">
+                            <select name="company_id" id="drpCompany" class="form-control">
                                     @foreach ($companies as $company)
                                     <option value="{{ $company->id }}" @if($company->id == $product->company_id) selected @endif>{{ $company->company_name }}</option>
                                     @endforeach
@@ -44,7 +44,7 @@
               <!-- 価格登録 -->
                    <div class="form-price pt-2">
                         <label for="price">価格<span>*</span></label>
-                            <input type="price" class="form-control" id="price" name="price" placeholder="Price" value="{{ $product->price}}">
+                            <input type="price" class="form-control" id="numPrice" name="price" placeholder="Price" value="{{ $product->price}}">
                                     @if ($errors->has('price'))
                                     <div class="text-danger">
                                         <p>{{ $errors->first('price') }}</p>
@@ -54,7 +54,7 @@
               <!-- 在庫数登録 -->
                    <div class="form-stock pt-2">
                        <label for="stock">在庫数<span>*</span></label>
-                           <input type="stock" class="form-control" id="stock" name="stock" placeholder="Stock" value="{{ $product->stock}}">
+                           <input type="stock" class="form-control" id="numStock" name="stock" placeholder="Stock" value="{{ $product->stock}}">
                                    @if ($errors->has('stock'))
                                   <div class="text-danger">
                                        <p>{{ $errors->first('stock') }}</p>
@@ -64,7 +64,7 @@
               <!-- コメント -->
                    <div class="form-comment pt-2">
                        <label for="comment">コメント</label>
-                            <textarea class="form-control" id="comment" name="comment">{{ $product->comment }}</textarea>
+                            <textarea class="form-control" id="areaComment" name="comment">{{ $product->comment }}</textarea>
                                     @if ($errors->has('comment'))
                                   <div class="text-danger">
                                       {{ $errors->first('comment') }}

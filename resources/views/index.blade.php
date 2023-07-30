@@ -19,12 +19,12 @@
                     <form class="form-inline" action="{{ route('search') }}" method="GET">
                         @csrf
                         <div class="form-group mr-2">
-                            <input type="text" name="keyword" class="form-control" placeholder="キーワード検索" id="keyword">
+                            <input type="text" name="keyword" class="form-control" placeholder="キーワード検索" id="txtKeyword">
                         </div>
 
                         <!-- カテゴリー -->
                         <div class="form-group mr-2">
-                            <select class="form-control" id="company_id" name="company">
+                            <select class="form-control" id="drpCompanyId" name="company">
                                 <option value="">メーカー名</option>
                                 @foreach ($companies as $company)
                                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-outline-secondary" id="serch-btn">検索</button>
+                            <button type="submit" class="btn btn-outline-secondary" id="btnSearch">検索</button>
                         </div>
                     </form>
                 </div>

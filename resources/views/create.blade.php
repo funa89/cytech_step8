@@ -14,7 +14,7 @@
             <div class="form-container pt-4">
                 <div class="form-group">
                     <label for="product_name">商品名<span>*</span></label>
-                    <input type="product_name" class="form-control" id="product_name"  name="product_name"  value="{{old('product_name')}}">
+                    <input type="product_name" class="form-control" id="txtProductName"  name="product_name"  value="{{old('product_name')}}">
                     @if ($errors->has('product_name'))
                     <div class="text-danger">
                             <p>{{ $errors->first('product_name') }}</p>
@@ -25,7 +25,7 @@
                 <!-- メーカ名 -->
                 <div class="form-group pt-2">
                     <label for="company_id">{{ __('メーカー名') }}<span>*</span><span class="badge badge-danger ml-2"></span></label>
-                    <select class="form-control" id="company_id" name="company_id">
+                    <select class="form-control" id="drpCompanyId" name="company_id">
                         <option value="">     </option>
                     @foreach ($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->company_name }}</option>
@@ -40,7 +40,7 @@
                 <!-- 価格登録 -->
                 <div class="form-group pt-2">
                     <label for="price">価格<span>*</span></label>
-                    <input type="price" class="form-control" id="price" name="price" value="{{old('price')}}">
+                    <input type="price" class="form-control" id="numPrice" name="price" value="{{old('price')}}">
                     @if ($errors->has('price'))
                       <div class="text-danger">
                             <p>{{ $errors->first('price') }}</p>
@@ -51,7 +51,7 @@
                 <!-- 在庫数登録 -->
                 <div class="form-group pt-2">
                     <label for="stock">在庫数<span>*</span></label>
-                    <input type="stock" class="form-control" id="stock" name="stock" value="{{old('stock')}}">
+                    <input type="stock" class="form-control" id="numStock" name="stock" value="{{old('stock')}}">
                     @if ($errors->has('stock'))
                       <div class="text-danger">
                             <p>{{ $errors->first('stock') }}</p>
@@ -62,7 +62,7 @@
                 <!-- コメント -->
                 <div class="form-group pt-2">
                     <label for="comment">コメント</label>
-                    <textarea class="form-control" id="comment" name="comment"></textarea>{{old('comment')}}</textarea>
+                    <textarea class="form-control" id="areaComment" name="comment"></textarea>{{old('comment')}}</textarea>
                     @if ($errors->has('comment'))
                       <div class="text-danger">
                             {{ $errors->first('comment') }}
