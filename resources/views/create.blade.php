@@ -84,7 +84,7 @@
                     </div>
                 <!-- 戻るボタン -->
                     <div class="back-btn">
-                       <input class="btn btn-primary" type="button" onclick="history.back(-1)" value="戻る">
+                       <a class="btn btn-primary" href="{{ route('index') }}">戻る</a>
                     </div>
                 </div>
             </div>

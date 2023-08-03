@@ -95,7 +95,7 @@
                            <button type="submit" class="btn btn-info">更新</button>
                      </div>
                      <div class="back-btn">
-                           <input class="btn btn-primary" type="button" onclick="history.back(-1)" value="戻る">
+                           <a class="btn btn-primary" href="{{ route('detail', $product->id) }}">戻る</a>
                      </div>
             </div>
           </form>
