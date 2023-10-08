@@ -96,6 +96,9 @@
                 @endforeach
             </tbody>
         </table>
+
+        <!-- ページネーションリンク -->
+       {{ $products->links() }}
     </div>
 </div>
 </div>

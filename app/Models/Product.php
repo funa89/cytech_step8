@@ -27,7 +27,7 @@ class Product extends Model{
     $products = DB::table('products')
         ->join('companies', 'company_id', '=', 'companies.id')
         ->select('products.*', 'companies.company_name')
-        ->paginate(10);
+        ->simplePaginate(10);
         return $products;
     }
 
