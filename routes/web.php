@@ -23,27 +23,19 @@ Route::get('/register',[RegisterController::class,'showRegistrationForm'])->name
 Route::post('/register',[RegisterController::class,'register']);
 
 Route::middleware('auth')->group(function(){
-  Route::get('/home',[ProductController::class,'index'])->name('home');
-//商品一覧画面
-  Route::get('/index',[ProductController::class, 'index'])->name('index');
-//新規登録画面
-  Route::get('/create', [ProductController::class, 'create'])->name('create');
-//登録処理
-  Route::post('/store', [ProductController::class, 'store'])->name('store');
-//検索機能
-  Route::get('/search', [ProductController::class, 'search'])->name('search');
-//詳細画面
-  Route::get('/detail/{id}', [ProductController::class, 'showDetail'])->name('detail');
-// 編集画面
-  Route::get('/details/edit/{id}', [ProductController::class, 'showEdit'])->name('edit');
-//編集画面更新
-  Route::put('/edit/update{id}', [ProductController::class, 'update'])->name('update')->middleware('web');
-// 削除
-  Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
-//購入画面
-  Route::get('/cart/{id}', [ProductController::class, 'cart'])->name('cart');
-// //購入処理
-  Route::post('/purchase/{id}', [ProductController::class, 'purchase'])->name('purchase');
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/home', 'home')->name('home');
+        Route::get('/index', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/search', 'search')->name('search');
+        Route::get('/detail/{id}', 'showDetail')->name('detail');
+        Route::get('/details/edit/{id}', 'showEdit')->name('edit');
+        Route::put('/edit/update{id}', 'update')->name('update')->middleware('web');
+        Route::delete('/delete/{id}', 'destroy')->name('delete');
+        Route::get('/cart/{id}',  'cart')->name('cart');
+        Route::post('/purchase/{id}', 'purchase')->name('purchase');
+    });
+  });
   
-});
-
+  
