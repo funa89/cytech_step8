@@ -41,12 +41,13 @@ class LoginController extends Controller
     // 自動ログインを無効化
     protected function authenticated(Request $request, $user)
     {
-         // ログイン後のリダイレクト先を修正
-         return redirect('/index');
+        // ログイン後のリダイレクト先を修正
+        return redirect('/index');
     }
 
     protected function loggedOut(Request $request)
     {
         return redirect('/login');
+
     }
 }
